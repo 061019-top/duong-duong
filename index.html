@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chúc Mừng Năm Mới 2026 🎉</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mali:wght@600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. CÀI ĐẶT CHUNG --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background:
+                radial-gradient(circle at top, #facc15 0%, transparent 55%),
+                radial-gradient(circle at bottom, #b91c1c 0%, transparent 60%),
+                radial-gradient(circle at 10% 10%, #fb7185 0%, transparent 55%),
+                radial-gradient(circle at 90% 15%, #38bdf8 0%, transparent 55%),
+                linear-gradient(180deg, #020617 0%, #111827 50%, #020617 100%);
+            font-family: 'Mali', cursive;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            position: relative;
+        }
+
+        .bg-bokeh {
+            position: absolute; inset: 0; pointer-events: none; z-index: 0;
+            background-image: radial-gradient(circle, rgba(248, 250, 252, 0.18) 1px, transparent 2px);
+            background-size: 40px 40px; opacity: 0.5;
+            animation: star-float 22s linear infinite;
+        }
+        @keyframes star-float { 0% { transform: translateY(0); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0); } }
+
+        /* --- 2. TRANG TRÍ --- */
+        .tet-decor-bottom {
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; /* Giảm chiều cao trên mobile */
+            background-image: url('https://png.pngtree.com/png-clipart/20230818/ourmid/pngtree-vietnamese-new-year-apricot-blossom-border-decoration-png-image_9190184.png');
+            background-repeat: no-repeat; background-position: center bottom; background-size: contain;
+            opacity: 0.9; z-index: 1; pointer-events: none;
+        }
+        .tet-decor-top {
+            position: absolute; top: -10px; left: 0; width: 100%; height: 150px;
+            background-image: url('https://png.pngtree.com/png-clipart/20220912/original/pngtree-lantern-vietnam-new-year-decoration-png-image_8549323.png');
+            background-repeat: repeat-x; background-size: contain;
+            z-index: 2; pointer-events: none;
+        }
+
+        /* --- 3. MÀN HÌNH ĐẾM NGƯỢC --- */
+        #countdown-section {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            z-index: 10; transition: opacity 0.8s ease, transform 0.8s ease;
+            padding-bottom: 50px; /* Đẩy nội dung lên xíu để tránh bị cành đào che */
+        }
+        .title {
+            color: #ffd700; font-family: 'Dancing Script', cursive; 
+            font-size: 5rem; text-align: center; line-height: 1.2;
+            margin-bottom: 1.5rem; padding: 0 10px;
+            text-shadow: 3px 3px 0px #8b0000, 0 0 30px #ffcc00; 
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        .timer-container { display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; }
+        .flip-label { color: #ffe082; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; text-shadow: 0 0 10px rgba(0, 0, 0, 0.6); }
+        
+        .flip-card {
+            width: 180px; height: 200px; border-radius: 24px;
+            background: linear-gradient(180deg, #fffaf0, #ffe082);
+            border: 5px solid #ffd700;
+            box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 215, 0, 0.95);
+            display: flex; align-items: center; justify-content: center;
+            perspective: 1400px; position: relative; overflow: hidden;
+        }
+        .flip-number {
+            font-size: 6rem; font-weight: 900; color: #b91c1c;
+            text-shadow: 0 0 15px rgba(248, 113, 113, 0.9);
+            transform-origin: center center; transform-style: preserve-3d; backface-visibility: hidden;
+        }
+        .flip-card.animate .flip-number { animation: flip-card 1s cubic-bezier(0.22, 0.61, 0.36, 1); }
+        @keyframes flip-card {
+            0% { transform: rotateX(0deg) scale(1); }
+            45% { transform: rotateX(-90deg) scale(0.92); }
+            55% { transform: rotateX(90deg) scale(0.92); }
+            100% { transform: rotateX(0deg) scale(1); }
+        }
+
+        /* --- 4. MÀN HÌNH PHÁO HOA --- */
+        #celebration-section {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; z-index: 5;
+        }
+        canvas { display: block; }
+        #text-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20;
+        }
+        .particle-text {
+            font-size: 6rem; font-weight: 900; color: transparent; text-transform: uppercase;
+            background-image: radial-gradient(circle, #fff 2px, transparent 2.5px);
+            background-size: 5px 5px; background-clip: text; -webkit-background-clip: text;
+            opacity: 0; transform: translateY(20px) scale(1);
+            transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+            position: absolute; text-align: center; width: 100%;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.9)); letter-spacing: 0.12em;
+        }
+        .color-mix { background-color: #fff; text-shadow: 0 0 22px #e5f2ff; }
+        .color-gold { background-color: #ffd700; filter: drop-shadow(0 0 10px #ff8c00); }
+        .color-cyan { background-color: #00ffff; filter: drop-shadow(0 0 10px #008b8b); }
+        .color-white { background-color: #ffffff; filter: drop-shadow(0 0 10px #ff0000); }
+        .happy-outline {
+            background-image: linear-gradient(90deg, #f97316, #facc15, #4ade80, #38bdf8);
+            -webkit-text-stroke: 2px rgba(15, 23, 42, 0.85); text-stroke: 2px rgba(15, 23, 42, 0.85);
+            filter: drop-shadow(0 0 18px rgba(251, 191, 36, 0.95));
+        }
+        .particle-text.show { opacity: 1; transform: translateY(0) scale(1); filter: drop-shadow(0 0 14px rgba(255,255,255,0.95)); }
+        .particle-text.hide { opacity: 0; transform: translateY(-10px) scale(0.96); filter: blur(12px); }
+
+        /* --- 5. NÚT BẤM START --- */
+        #start-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999;
+            display: flex; justify-content: center; align-items: center; flex-direction: column; cursor: pointer;
+            text-align: center;
+        }
+        .btn-play {
+            padding: 20px 40px; 
+            background: linear-gradient(90deg, #ff0000, #ffcc00);
+            color: #fff; border-radius: 60px; font-size: 2rem; font-weight: bold; border: 3px solid #fff;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.8); animation: pulse 1.2s infinite; font-family: 'Dancing Script', cursive;
+            white-space: nowrap; /* Không xuống dòng chữ trong nút */
+        }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
+
+        /* --- RESPONSIVE MOBILE (QUAN TRỌNG) --- */
+        @media (max-width: 768px) {
+            .title { font-size: 3rem; margin-bottom: 1rem; }
+            .flip-card { width: 140px; height: 160px; border-width: 3px; }
+            .flip-number { font-size: 4.5rem; }
+            .particle-text { font-size: 3rem; padding: 0 10px; }
+            .btn-play { font-size: 1.5rem; padding: 15px 30px; }
+            .tet-decor-top { height: 100px; } /* Lồng đèn nhỏ lại */
+        }
+        
+        @media (max-width: 480px) {
+            .title { font-size: 2.5rem; }
+            .flip-card { width: 120px; height: 140px; }
+            .flip-number { font-size: 3.5rem; }
+            .particle-text { font-size: 2.2rem; }
+            /* Căn chỉnh lại vị trí chữ chúc mừng cho màn hình nhỏ */
+            #msg-chucmung, #msg-ankhang { top: 30% !important; }
+            #msg-nammoi, #msg-thinhvuong { top: 45% !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-bokeh"></div>
+    <div class="tet-decor-top"></div>
+    <div class="tet-decor-bottom"></div>
+
+    <div id="start-overlay" onclick="startExperience()">
+        <div class="btn-play">🧨 KHAI XUÂN 🧨</div>
+        <p style="color:#ffd700; margin-top:20px; font-size: 1rem; padding: 0 20px;">
+            (Chạm vào màn hình để mở nhạc)
+        </p>
+    </div>
+
+    <div id="countdown-section">
+        <h1 class="title">Xuân Ất Tỵ 2026</h1>
+        <div class="timer-container">
+            <div class="flip-card">
+                <span class="flip-number" id="flip-number">3</span>
+            </div>
+            <div class="flip-label">Đếm ngược</div>
+        </div>
+    </div>
+
+    <div id="celebration-section">
+        <canvas id="canvas"></canvas>
+        <div id="text-overlay">
+            <div id="msg-happy" class="particle-text color-mix happy-outline">Happy New Year</div>
+            <div id="msg-chucmung" class="particle-text color-white" style="top: 35%;">CHÚC MỪNG</div>
+            <div id="msg-nammoi" class="particle-text color-gold" style="top: 55%;">NĂM MỚI 2026</div>
+            <div id="msg-ankhang" class="particle-text color-cyan" style="top: 35%;">AN KHANG</div>
+            <div id="msg-thinhvuong" class="particle-text color-gold" style="top: 55%;">THỊNH VƯỢNG</div>
+        </div>
+    </div>
+
+    <audio id="bg-music"></audio>
+
+    <script>
+        // CẤU HÌNH NHẠC
+        const MUSIC_URL = "./tet.mp3"; 
+
+        const audio = document.getElementById('bg-music');
+        let countdownValue = 3;
+        const flipNumberEl = document.getElementById('flip-number');
+        const flipCardEl = document.querySelector('.flip-card');
+
+        function startExperience() {
+            document.getElementById('start-overlay').style.display = 'none';
+            
+            if (MUSIC_URL) {
+                audio.src = MUSIC_URL;
+                audio.loop = true;
+                audio.volume = 1.0;
+                var playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => { console.log("Nhạc đang chạy!"); })
+                    .catch(error => { console.log("Lỗi phát nhạc:", error); });
+                }
+            }
+            startFlipCountdown();
+        }
+
+        function startFlipCountdown() {
+            countdownValue = 3;
+            runFlipStep();
+        }
+
+        function runFlipStep() {
+            if (countdownValue < 1) {
+                triggerCelebration();
+                return;
+            }
+            flipNumberEl.textContent = countdownValue;
+            flipCardEl.classList.add('animate');
+            setTimeout(() => {
+                const next = countdownValue - 1;
+                flipNumberEl.textContent = next === 0 ? '🎉' : next;
+            }, 500);
+            setTimeout(() => {
+                flipCardEl.classList.remove('animate');
+                countdownValue--;
+                if (countdownValue > 0) {
+                    setTimeout(runFlipStep, 450);
+                } else {
+                    setTimeout(triggerCelebration, 650);
+                }
+            }, 1000);
+        }
+
+        function triggerCelebration() {
+            const countdownSec = document.getElementById('countdown-section');
+            countdownSec.style.opacity = 0;
+            countdownSec.style.transform = "scale(1.5)";
+            setTimeout(() => {
+                countdownSec.style.display = 'none';
+                document.getElementById('celebration-section').style.display = 'block';
+                initFireworks();
+                showText('msg-happy');
+                setTimeout(() => {
+                    hideText('msg-happy');
+                    setTimeout(() => showText('msg-chucmung'), 300);
+                    setTimeout(() => showText('msg-nammoi'), 1200);
+                }, 3000);
+                setTimeout(() => {
+                    hideText('msg-chucmung');
+                    hideText('msg-nammoi');
+                    setTimeout(() => {
+                        showText('msg-ankhang');
+                        showText('msg-thinhvuong');
+                    }, 200);
+                }, 6000);
+            }, 800);
+        }
+
+        function showText(id) {
+            document.getElementById(id).classList.remove('hide');
+            document.getElementById(id).classList.add('show');
+        }
+        function hideText(id) {
+            document.getElementById(id).classList.remove('show');
+            document.getElementById(id).classList.add('hide');
+        }
+
+        // --- CANVAS PHÁO HOA (ĐÃ CHỈNH TỐC ĐỘ CHẬM HƠN) ---
+        const canvas = document.getElementById("canvas"); 
+        const ctx = canvas.getContext("2d");
+        let cw = window.innerWidth, ch = window.innerHeight; 
+        let fireworks = [], particles = []; 
+        // Tăng timerTotal lên 15 để bắn thưa hơn (cũ là 6)
+        let hue = 120, timerTotal = 15, timerTick = 0;
+        canvas.width = cw; canvas.height = ch;
+        function random(min, max) { return Math.random() * (max - min) + min; }
+        class Firework { 
+            constructor(sx, sy, tx, ty) { 
+                this.x = sx; this.y = sy; this.sx = sx; this.sy = sy; this.tx = tx; this.ty = ty; 
+                this.distanceToTarget = Math.sqrt(Math.pow(tx - sx, 2) + Math.pow(ty - sy, 2)); 
+                this.distanceTraveled = 0; this.coordinates = []; this.coordinateCount = 3; 
+                while (this.coordinateCount--) { this.coordinates.push([this.x, this.y]); } 
+                this.angle = Math.atan2(ty - sy, tx - sx); 
+                // Giảm tốc độ bay lên (cũ là 2.4 và 1.06)
+                this.speed = 2; this.acceleration = 1.04; 
+                this.brightness = random(70, 92);
+            } 
+            update(index) { 
+                this.coordinates.pop(); this.coordinates.unshift([this.x, this.y]); 
+                this.speed *= this.acceleration; 
+                let vx = Math.cos(this.angle) * this.speed, vy = Math.sin(this.angle) * this.speed; 
+                this.distanceTraveled = Math.sqrt(Math.pow(this.sx - this.x + vx, 2) + Math.pow(this.sy - this.y + vy, 2)); 
+                if (this.distanceTraveled >= this.distanceToTarget) { createParticles(this.tx, this.ty); fireworks.splice(index, 1); } 
+                else { this.x += vx; this.y += vy; } 
+            } 
+            draw() { 
+                ctx.beginPath(); 
+                ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]); 
+                ctx.lineTo(this.x, this.y); 
+                ctx.strokeStyle = 'hsl(' + hue + ', 100%, ' + this.brightness + '%)'; 
+                ctx.stroke(); 
+            } 
+        }
+        class Particle { 
+            constructor(x, y) { 
+                this.x = x; this.y = y; this.coordinates = []; this.coordinateCount = 5; 
+                while (this.coordinateCount--) { this.coordinates.push([this.x, this.y]); } 
+                this.angle = random(0, Math.PI * 2); 
+                // Giảm tốc độ nổ bung ra (cũ là random(2, 16))
+                this.speed = random(2, 10); 
+                // Tăng ma sát và giảm trọng lực để bay chậm hơn (cũ là 0.94 và 0.85)
+                this.friction = 0.92; this.gravity = 0.6; this.hue = random(hue - 70, hue + 70); 
+                this.brightness = random(75, 100); this.alpha = 1; this.decay = random(0.007, 0.02); 
+            } 
+            update(index) { 
+                this.coordinates.pop(); this.coordinates.unshift([this.x, this.y]); 
+                this.speed *= this.friction; 
+                this.x += Math.cos(this.angle) * this.speed; this.y += Math.sin(this.angle) * this.speed + this.gravity; 
+                this.alpha -= this.decay; 
+                if (this.alpha <= this.decay) particles.splice(index, 1); 
+            } 
+            draw() { 
+                ctx.beginPath(); 
+                ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]); 
+                ctx.lineTo(this.x, this.y); 
+                ctx.strokeStyle = 'hsla(' + this.hue + ', 100%, ' + this.brightness + '%, ' + this.alpha + ')'; 
+                ctx.stroke(); 
+            } 
+        }
+        function createParticles(x, y) { 
+            let particleCount = 180;
+            while (particleCount--) { particles.push(new Particle(x, y)); } 
+        }
+        function initFireworks() { 
+            function loop() { 
+                requestAnimationFrame(loop); 
+                hue += 0.8; 
+                ctx.globalCompositeOperation = 'destination-out'; 
+                ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'; 
+                ctx.fillRect(0, 0, cw, ch); 
+                ctx.globalCompositeOperation = 'lighter'; 
+                let i = fireworks.length; while (i--) { fireworks[i].draw(); fireworks[i].update(i); } 
+                let j = particles.length; while (j--) { particles[j].draw(); particles[j].update(j); } 
+                if (timerTick >= timerTotal) { 
+                    fireworks.push(new Firework(cw / 2, ch, random(0, cw), random(0, ch / 2.5))); 
+                    fireworks.push(new Firework(cw / 2, ch, random(0, cw), random(0, ch / 2.5)));
+                    timerTick = 0; 
+                } else { timerTick++; } 
+            } 
+            loop(); 
+        }
+        window.addEventListener('resize', function() { cw = window.innerWidth; ch = window.innerHeight; canvas.width = cw; canvas.height = ch; });
+    </script>
+</body>
+</html>
