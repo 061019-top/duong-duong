@@ -33,7 +33,7 @@
 
         /* --- 2. TRANG TRÍ --- */
         .tet-decor-bottom {
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; /* Giảm chiều cao trên mobile */
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
             background-image: url('https://png.pngtree.com/png-clipart/20230818/ourmid/pngtree-vietnamese-new-year-apricot-blossom-border-decoration-png-image_9190184.png');
             background-repeat: no-repeat; background-position: center bottom; background-size: contain;
             opacity: 0.9; z-index: 1; pointer-events: none;
@@ -50,7 +50,7 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             z-index: 10; transition: opacity 0.8s ease, transform 0.8s ease;
-            padding-bottom: 50px; /* Đẩy nội dung lên xíu để tránh bị cành đào che */
+            padding-bottom: 50px;
         }
         .title {
             color: #ffd700; font-family: 'Dancing Script', cursive; 
@@ -61,15 +61,60 @@
         }
         @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
 
-        .timer-container { display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; }
-        .flip-label { color: #ffe082; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; text-shadow: 0 0 10px rgba(0, 0, 0, 0.6); }
+        .timer-container { display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; width: 100%; }
         
+        /* --- STYLE MỚI CHO ĐỒNG HỒ 4 Ô VUÔNG --- */
+        #realtime-clock {
+            display: none; /* JS sẽ bật lên */
+            display: flex; /* Dàn hàng ngang */
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .time-card {
+            /* Hình vuông bo tròn */
+            width: 100px;
+            height: 110px;
+            background: rgba(185, 28, 28, 0.7); /* Màu đỏ tết trong suốt */
+            border: 2px solid #ffd700; /* Viền vàng */
+            border-radius: 15px; /* Bo góc */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            animation: popIn 0.5s ease-out;
+        }
+
+        .time-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.9rem;
+            color: #ffd700; /* Chữ vàng */
+            text-transform: uppercase;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
+
+
+        /* STYLE CHO THẺ LẬT 3-2-1 (GIỮ NGUYÊN) */
         .flip-card {
             width: 180px; height: 200px; border-radius: 24px;
             background: linear-gradient(180deg, #fffaf0, #ffe082);
             border: 5px solid #ffd700;
             box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 215, 0, 0.95);
-            display: flex; align-items: center; justify-content: center;
+            display: none;
+            align-items: center; justify-content: center;
             perspective: 1400px; position: relative; overflow: hidden;
         }
         .flip-number {
@@ -84,6 +129,7 @@
             55% { transform: rotateX(90deg) scale(0.92); }
             100% { transform: rotateX(0deg) scale(1); }
         }
+        .flip-label-321 { color: #ffe082; font-size: 1.1rem; letter-spacing: 0.08em; text-transform: uppercase; text-shadow: 0 0 10px rgba(0, 0, 0, 0.6); display: none; margin-top: 20px;}
 
         /* --- 4. MÀN HÌNH PHÁO HOA --- */
         #celebration-section {
@@ -127,26 +173,25 @@
             background: linear-gradient(90deg, #ff0000, #ffcc00);
             color: #fff; border-radius: 60px; font-size: 2rem; font-weight: bold; border: 3px solid #fff;
             box-shadow: 0 0 40px rgba(255, 0, 0, 0.8); animation: pulse 1.2s infinite; font-family: 'Dancing Script', cursive;
-            white-space: nowrap; /* Không xuống dòng chữ trong nút */
+            white-space: nowrap; 
         }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.08); } 100% { transform: scale(1); } }
 
-        /* --- RESPONSIVE MOBILE (QUAN TRỌNG) --- */
+        /* --- RESPONSIVE MOBILE --- */
         @media (max-width: 768px) {
             .title { font-size: 3rem; margin-bottom: 1rem; }
-            .flip-card { width: 140px; height: 160px; border-width: 3px; }
-            .flip-number { font-size: 4.5rem; }
-            .particle-text { font-size: 3rem; padding: 0 10px; }
-            .btn-play { font-size: 1.5rem; padding: 15px 30px; }
-            .tet-decor-top { height: 100px; } /* Lồng đèn nhỏ lại */
+            .tet-decor-top { height: 100px; }
+            /* Mobile thì thu nhỏ ô vuông lại cho vừa */
+            .time-card { width: 70px; height: 80px; border-radius: 10px; gap: 2px; }
+            .time-value { font-size: 2rem; }
+            .time-label { font-size: 0.7rem; }
+            #realtime-clock { gap: 8px; }
         }
         
         @media (max-width: 480px) {
-            .title { font-size: 2.5rem; }
-            .flip-card { width: 120px; height: 140px; }
-            .flip-number { font-size: 3.5rem; }
-            .particle-text { font-size: 2.2rem; }
-            /* Căn chỉnh lại vị trí chữ chúc mừng cho màn hình nhỏ */
+            .title { font-size: 2.2rem; }
+            .time-card { width: 65px; height: 75px; }
+            .time-value { font-size: 1.8rem; }
             #msg-chucmung, #msg-ankhang { top: 30% !important; }
             #msg-nammoi, #msg-thinhvuong { top: 45% !important; }
         }
@@ -168,10 +213,30 @@
     <div id="countdown-section">
         <h1 class="title">Xuân Ất Tỵ 2026</h1>
         <div class="timer-container">
+            
+            <div id="realtime-clock" style="display: none;">
+                <div class="time-card">
+                    <span class="time-value" id="rt-days">00</span>
+                    <span class="time-label">Ngày</span>
+                </div>
+                <div class="time-card">
+                    <span class="time-value" id="rt-hours">00</span>
+                    <span class="time-label">Giờ</span>
+                </div>
+                <div class="time-card">
+                    <span class="time-value" id="rt-minutes">00</span>
+                    <span class="time-label">Phút</span>
+                </div>
+                <div class="time-card">
+                    <span class="time-value" id="rt-seconds">00</span>
+                    <span class="time-label">Giây</span>
+                </div>
+            </div>
+
             <div class="flip-card">
                 <span class="flip-number" id="flip-number">3</span>
             </div>
-            <div class="flip-label">Đếm ngược</div>
+            <div class="flip-label-321">Sắp giao thừa...</div>
         </div>
     </div>
 
@@ -189,31 +254,72 @@
     <audio id="bg-music"></audio>
 
     <script>
-        // CẤU HÌNH NHẠC
+        // --- CẤU HÌNH ---
         const MUSIC_URL = "./tet.mp3"; 
+        const TET_DATE = new Date("Feb 17, 2026 00:00:00").getTime();
 
         const audio = document.getElementById('bg-music');
         let countdownValue = 3;
         const flipNumberEl = document.getElementById('flip-number');
         const flipCardEl = document.querySelector('.flip-card');
+        const flipLabel321 = document.querySelector('.flip-label-321');
+        const realtimeClock = document.getElementById('realtime-clock');
 
         function startExperience() {
             document.getElementById('start-overlay').style.display = 'none';
-            
             if (MUSIC_URL) {
                 audio.src = MUSIC_URL;
-                audio.loop = true;
-                audio.volume = 1.0;
+                audio.loop = true; audio.volume = 1.0;
                 var playPromise = audio.play();
                 if (playPromise !== undefined) {
-                    playPromise.then(_ => { console.log("Nhạc đang chạy!"); })
-                    .catch(error => { console.log("Lỗi phát nhạc:", error); });
+                    playPromise.then(_ => {}).catch(error => { console.log("Lỗi nhạc:", error); });
                 }
             }
-            startFlipCountdown();
+            checkTimeAndRun();
+        }
+
+        function checkTimeAndRun() {
+            const now = new Date().getTime();
+            const distance = TET_DATE - now;
+
+            if (distance > 0) {
+                realtimeClock.style.display = 'flex'; // Dùng flex để dàn ngang
+                updateRealtimeClock();
+                const interval = setInterval(() => {
+                    const shouldStop = updateRealtimeClock();
+                    if (shouldStop) {
+                        clearInterval(interval);
+                        realtimeClock.style.display = 'none';
+                        startFlipCountdown();
+                    }
+                }, 1000);
+            } else {
+                startFlipCountdown();
+            }
+        }
+
+        function updateRealtimeClock() {
+            const now = new Date().getTime();
+            const distance = TET_DATE - now;
+            if (distance < 0) return true;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Gán số vào từng ô vuông
+            document.getElementById('rt-days').innerText = days < 10 ? "0" + days : days;
+            document.getElementById('rt-hours').innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById('rt-minutes').innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById('rt-seconds').innerText = seconds < 10 ? "0" + seconds : seconds;
+            
+            return false;
         }
 
         function startFlipCountdown() {
+            flipCardEl.style.display = "flex";
+            flipLabel321.style.display = "block";
             countdownValue = 3;
             runFlipStep();
         }
@@ -232,11 +338,8 @@
             setTimeout(() => {
                 flipCardEl.classList.remove('animate');
                 countdownValue--;
-                if (countdownValue > 0) {
-                    setTimeout(runFlipStep, 450);
-                } else {
-                    setTimeout(triggerCelebration, 650);
-                }
+                if (countdownValue > 0) { setTimeout(runFlipStep, 450); } 
+                else { setTimeout(triggerCelebration, 650); }
             }, 1000);
         }
 
@@ -257,29 +360,19 @@
                 setTimeout(() => {
                     hideText('msg-chucmung');
                     hideText('msg-nammoi');
-                    setTimeout(() => {
-                        showText('msg-ankhang');
-                        showText('msg-thinhvuong');
-                    }, 200);
+                    setTimeout(() => { showText('msg-ankhang'); showText('msg-thinhvuong'); }, 200);
                 }, 6000);
             }, 800);
         }
 
-        function showText(id) {
-            document.getElementById(id).classList.remove('hide');
-            document.getElementById(id).classList.add('show');
-        }
-        function hideText(id) {
-            document.getElementById(id).classList.remove('show');
-            document.getElementById(id).classList.add('hide');
-        }
+        function showText(id) { document.getElementById(id).classList.remove('hide'); document.getElementById(id).classList.add('show'); }
+        function hideText(id) { document.getElementById(id).classList.remove('show'); document.getElementById(id).classList.add('hide'); }
 
-        // --- CANVAS PHÁO HOA (ĐÃ CHỈNH TỐC ĐỘ CHẬM HƠN) ---
+        // --- CANVAS PHÁO HOA ---
         const canvas = document.getElementById("canvas"); 
         const ctx = canvas.getContext("2d");
         let cw = window.innerWidth, ch = window.innerHeight; 
         let fireworks = [], particles = []; 
-        // Tăng timerTotal lên 15 để bắn thưa hơn (cũ là 6)
         let hue = 120, timerTotal = 15, timerTick = 0;
         canvas.width = cw; canvas.height = ch;
         function random(min, max) { return Math.random() * (max - min) + min; }
@@ -289,9 +382,7 @@
                 this.distanceToTarget = Math.sqrt(Math.pow(tx - sx, 2) + Math.pow(ty - sy, 2)); 
                 this.distanceTraveled = 0; this.coordinates = []; this.coordinateCount = 3; 
                 while (this.coordinateCount--) { this.coordinates.push([this.x, this.y]); } 
-                this.angle = Math.atan2(ty - sy, tx - sx); 
-                // Giảm tốc độ bay lên (cũ là 2.4 và 1.06)
-                this.speed = 2; this.acceleration = 1.04; 
+                this.angle = Math.atan2(ty - sy, tx - sx); this.speed = 2; this.acceleration = 1.04; 
                 this.brightness = random(70, 92);
             } 
             update(index) { 
@@ -314,10 +405,7 @@
             constructor(x, y) { 
                 this.x = x; this.y = y; this.coordinates = []; this.coordinateCount = 5; 
                 while (this.coordinateCount--) { this.coordinates.push([this.x, this.y]); } 
-                this.angle = random(0, Math.PI * 2); 
-                // Giảm tốc độ nổ bung ra (cũ là random(2, 16))
-                this.speed = random(2, 10); 
-                // Tăng ma sát và giảm trọng lực để bay chậm hơn (cũ là 0.94 và 0.85)
+                this.angle = random(0, Math.PI * 2); this.speed = random(2, 10); 
                 this.friction = 0.92; this.gravity = 0.6; this.hue = random(hue - 70, hue + 70); 
                 this.brightness = random(75, 100); this.alpha = 1; this.decay = random(0.007, 0.02); 
             } 
@@ -336,17 +424,11 @@
                 ctx.stroke(); 
             } 
         }
-        function createParticles(x, y) { 
-            let particleCount = 180;
-            while (particleCount--) { particles.push(new Particle(x, y)); } 
-        }
+        function createParticles(x, y) { let particleCount = 180; while (particleCount--) { particles.push(new Particle(x, y)); } }
         function initFireworks() { 
             function loop() { 
-                requestAnimationFrame(loop); 
-                hue += 0.8; 
-                ctx.globalCompositeOperation = 'destination-out'; 
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'; 
-                ctx.fillRect(0, 0, cw, ch); 
+                requestAnimationFrame(loop); hue += 0.8; 
+                ctx.globalCompositeOperation = 'destination-out'; ctx.fillStyle = 'rgba(0, 0, 0, 0.45)'; ctx.fillRect(0, 0, cw, ch); 
                 ctx.globalCompositeOperation = 'lighter'; 
                 let i = fireworks.length; while (i--) { fireworks[i].draw(); fireworks[i].update(i); } 
                 let j = particles.length; while (j--) { particles[j].draw(); particles[j].update(j); } 
@@ -355,8 +437,7 @@
                     fireworks.push(new Firework(cw / 2, ch, random(0, cw), random(0, ch / 2.5)));
                     timerTick = 0; 
                 } else { timerTick++; } 
-            } 
-            loop(); 
+            } loop(); 
         }
         window.addEventListener('resize', function() { cw = window.innerWidth; ch = window.innerHeight; canvas.width = cw; canvas.height = ch; });
     </script>
