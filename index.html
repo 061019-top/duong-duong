@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chúc Mừng Năm Mới 2026 🎉</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mali:wght@600;700&display=swap" rel="stylesheet">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Mali:wght@600;700&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         /* --- 1. CÀI ĐẶT CHUNG --- */
@@ -59,62 +60,30 @@
             text-shadow: 3px 3px 0px #8b0000, 0 0 30px #ffcc00; 
             animation: float 3s ease-in-out infinite;
         }
-        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0); } }
 
         .timer-container { display: flex; flex-direction: column; align-items: center; gap: 16px; position: relative; width: 100%; }
         
-        /* --- STYLE MỚI CHO ĐỒNG HỒ 4 Ô VUÔNG --- */
         #realtime-clock {
-            display: none; /* JS sẽ bật lên */
-            display: flex; /* Dàn hàng ngang */
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
+            display: none; display: flex; gap: 15px; justify-content: center; align-items: center;
         }
-
         .time-card {
-            /* Hình vuông bo tròn */
-            width: 100px;
-            height: 110px;
-            background: rgba(185, 28, 28, 0.7); /* Màu đỏ tết trong suốt */
-            border: 2px solid #ffd700; /* Viền vàng */
-            border-radius: 15px; /* Bo góc */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
+            width: 100px; height: 110px;
+            background: rgba(185, 28, 28, 0.7); border: 2px solid #ffd700; border-radius: 15px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); backdrop-filter: blur(4px);
             animation: popIn 0.5s ease-out;
         }
-
-        .time-value {
-            font-size: 3rem;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-            line-height: 1;
-        }
-
-        .time-label {
-            font-size: 0.9rem;
-            color: #ffd700; /* Chữ vàng */
-            text-transform: uppercase;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
+        .time-value { font-size: 3rem; font-weight: 900; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5); line-height: 1; }
+        .time-label { font-size: 0.9rem; color: #ffd700; text-transform: uppercase; margin-top: 5px; font-weight: bold; }
         @keyframes popIn { 0% { transform: scale(0); } 100% { transform: scale(1); } }
 
-
-        /* STYLE CHO THẺ LẬT 3-2-1 (GIỮ NGUYÊN) */
         .flip-card {
             width: 180px; height: 200px; border-radius: 24px;
             background: linear-gradient(180deg, #fffaf0, #ffe082);
             border: 5px solid #ffd700;
             box-shadow: 0 18px 35px rgba(0, 0, 0, 0.6), 0 0 28px rgba(255, 215, 0, 0.95);
-            display: none;
-            align-items: center; justify-content: center;
+            display: none; align-items: center; justify-content: center;
             perspective: 1400px; position: relative; overflow: hidden;
         }
         .flip-number {
@@ -141,6 +110,40 @@
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 20;
         }
+        
+        /* --- STYLE LỜI CHÚC (ĐỔI FONT Ở ĐÂY) --- */
+        #typewriter-box {
+            position: absolute;
+            top: 40%; left: 50%; transform: translate(-50%, -50%);
+            width: 90%; max-width: 700px;
+            text-align: center;
+            
+            /* SỬ DỤNG FONT MỚI: Great Vibes */
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.8rem; /* Tăng kích thước vì font này nét thanh */
+            line-height: 1.4;
+            
+            z-index: 30;
+            display: none;
+            
+            font-weight: normal; /* Font này mặc định đã đẹp, không cần quá đậm */
+            color: #fff;
+            
+            /* Hiệu ứng viền và phát sáng */
+            text-shadow: 
+                0 0 5px #ffd700, 
+                0 0 15px #ff8c00,
+                2px 2px 2px rgba(0,0,0,0.8);
+        }
+        .cursor {
+            display: inline-block; width: 2px; height: 1em; background-color: #ffd700;
+            margin-left: 5px; animation: blink 1s infinite; vertical-align: middle;
+            box-shadow: 0 0 10px #ffd700;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+
+        /* STYLE CHO CHỮ CHÚC MỪNG TO */
         .particle-text {
             font-size: 6rem; font-weight: 900; color: transparent; text-transform: uppercase;
             background-image: radial-gradient(circle, #fff 2px, transparent 2.5px);
@@ -181,11 +184,12 @@
         @media (max-width: 768px) {
             .title { font-size: 3rem; margin-bottom: 1rem; }
             .tet-decor-top { height: 100px; }
-            /* Mobile thì thu nhỏ ô vuông lại cho vừa */
             .time-card { width: 70px; height: 80px; border-radius: 10px; gap: 2px; }
             .time-value { font-size: 2rem; }
             .time-label { font-size: 0.7rem; }
             #realtime-clock { gap: 8px; }
+            /* Chỉnh font size trên mobile cho cân đối */
+            #typewriter-box { font-size: 2rem; width: 95%; top: 45%; }
         }
         
         @media (max-width: 480px) {
@@ -194,6 +198,8 @@
             .time-value { font-size: 1.8rem; }
             #msg-chucmung, #msg-ankhang { top: 30% !important; }
             #msg-nammoi, #msg-thinhvuong { top: 45% !important; }
+            /* Mobile nhỏ hơn nữa */
+            #typewriter-box { font-size: 1.6rem; top: 45%; }
         }
     </style>
 </head>
@@ -213,7 +219,6 @@
     <div id="countdown-section">
         <h1 class="title">Xuân Ất Tỵ 2026</h1>
         <div class="timer-container">
-            
             <div id="realtime-clock" style="display: none;">
                 <div class="time-card">
                     <span class="time-value" id="rt-days">00</span>
@@ -243,6 +248,11 @@
     <div id="celebration-section">
         <canvas id="canvas"></canvas>
         <div id="text-overlay">
+            
+            <div id="typewriter-box">
+                <span id="typewriter-content"></span><span class="cursor"></span>
+            </div>
+
             <div id="msg-happy" class="particle-text color-mix happy-outline">Happy New Year</div>
             <div id="msg-chucmung" class="particle-text color-white" style="top: 35%;">CHÚC MỪNG</div>
             <div id="msg-nammoi" class="particle-text color-gold" style="top: 55%;">NĂM MỚI 2026</div>
@@ -256,7 +266,13 @@
     <script>
         // --- CẤU HÌNH ---
         const MUSIC_URL = "./tet.mp3"; 
-        const TET_DATE = new Date("Feb 17, 2026 00:00:00").getTime();
+        
+        const WISH_MESSAGE = "Năm mới đến rồi, chúc cậu luôn hạnh phúc, bình an và lúc nào cũng cười thật tươi. Hy vọng năm nay mình sẽ có nhiều cơ hội được quan tâm và ở gần cậu hơn 💕";
+        
+        // --- CHẾ ĐỘ TEST (+10 GIÂY) ---
+        // Khi dùng thật: Hãy comment dòng dưới và mở dòng TET_DATE thật ra
+        //const TET_DATE = new Date().getTime() + 10000; 
+         const TET_DATE = new Date("Feb 17, 2026 00:00:00").getTime();
 
         const audio = document.getElementById('bg-music');
         let countdownValue = 3;
@@ -283,7 +299,7 @@
             const distance = TET_DATE - now;
 
             if (distance > 0) {
-                realtimeClock.style.display = 'flex'; // Dùng flex để dàn ngang
+                realtimeClock.style.display = 'flex'; 
                 updateRealtimeClock();
                 const interval = setInterval(() => {
                     const shouldStop = updateRealtimeClock();
@@ -308,12 +324,10 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            // Gán số vào từng ô vuông
             document.getElementById('rt-days').innerText = days < 10 ? "0" + days : days;
             document.getElementById('rt-hours').innerText = hours < 10 ? "0" + hours : hours;
             document.getElementById('rt-minutes').innerText = minutes < 10 ? "0" + minutes : minutes;
             document.getElementById('rt-seconds').innerText = seconds < 10 ? "0" + seconds : seconds;
-            
             return false;
         }
 
@@ -347,22 +361,53 @@
             const countdownSec = document.getElementById('countdown-section');
             countdownSec.style.opacity = 0;
             countdownSec.style.transform = "scale(1.5)";
+            
             setTimeout(() => {
                 countdownSec.style.display = 'none';
                 document.getElementById('celebration-section').style.display = 'block';
                 initFireworks();
-                showText('msg-happy');
-                setTimeout(() => {
-                    hideText('msg-happy');
-                    setTimeout(() => showText('msg-chucmung'), 300);
-                    setTimeout(() => showText('msg-nammoi'), 1200);
-                }, 3000);
-                setTimeout(() => {
-                    hideText('msg-chucmung');
-                    hideText('msg-nammoi');
-                    setTimeout(() => { showText('msg-ankhang'); showText('msg-thinhvuong'); }, 200);
-                }, 6000);
+                startTypeWriterMessage(); // Bắt đầu chạy chữ
             }, 800);
+        }
+
+        function startTypeWriterMessage() {
+            const box = document.getElementById('typewriter-box');
+            const content = document.getElementById('typewriter-content');
+            box.style.display = 'block';
+            content.innerHTML = ""; 
+
+            let i = 0;
+            const speed = 50; 
+
+            function type() {
+                if (i < WISH_MESSAGE.length) {
+                    content.innerHTML += WISH_MESSAGE.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    // Đợi 1 giây rồi mờ đi
+                    setTimeout(() => {
+                        box.style.transition = "opacity 0.5s ease"; 
+                        box.style.opacity = "0";
+                        setTimeout(showBigTextSequence, 500);
+                    }, 1000); 
+                }
+            }
+            type();
+        }
+
+        function showBigTextSequence() {
+            showText('msg-happy');
+            setTimeout(() => {
+                hideText('msg-happy');
+                setTimeout(() => showText('msg-chucmung'), 300);
+                setTimeout(() => showText('msg-nammoi'), 1200);
+            }, 3000);
+            setTimeout(() => {
+                hideText('msg-chucmung');
+                hideText('msg-nammoi');
+                setTimeout(() => { showText('msg-ankhang'); showText('msg-thinhvuong'); }, 200);
+            }, 6000);
         }
 
         function showText(id) { document.getElementById(id).classList.remove('hide'); document.getElementById(id).classList.add('show'); }
